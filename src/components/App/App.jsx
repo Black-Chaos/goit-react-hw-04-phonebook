@@ -20,8 +20,6 @@ export function App() {
     return true
   };
 
-  const handleFilter = e => setFilter(e.target.value.toLowerCase());
-
   const filteredContacts = () => {
     if (filter) {
       return contacts.filter(({ name }) => name.toLowerCase().includes(filter));
@@ -39,11 +37,17 @@ export function App() {
         <Container>
           <div className="form-container">
             <ContactForm addContact={addContact} />
-            <Filter val={filter} handleFilter={handleFilter} />
+            <Filter
+              val={filter}
+              handleFilter={e => setFilter(e.target.value.toLowerCase())}
+            />
           </div>
           <div className="contacts-container">
             <h2 className="title">Contacts</h2>
-            <ContactsList contacts={filteredContacts()} handleDelete={deleteContact} />
+            <ContactsList
+              contacts={filteredContacts()}
+              handleDelete={deleteContact}
+            />
           </div>
         </Container>
       </>
